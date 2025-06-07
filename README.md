@@ -12,6 +12,7 @@ A powerful tool for solving mathematical equations using various numerical metho
   - Muller's Method
 - **Customizable Parameters**: Set your desired tolerance and maximum iterations
 - **Cross-Platform Support**: Works on Windows, macOS, and Linux
+- **Precision Control**: All results are rounded to 4 decimal places for readability
 
 ## Installation
 
@@ -86,6 +87,10 @@ The Newton-Raphson method is a powerful root-finding algorithm that uses the fir
 
 ### Muller's Method
 Muller's method is a root-finding algorithm that extends the secant method to use quadratic interpolation among three points. It can find complex roots and often converges faster than linear methods for certain types of problems.
+
+## Author
+
+Developed by Prathamesh Khade
 
 ## Contributing
 

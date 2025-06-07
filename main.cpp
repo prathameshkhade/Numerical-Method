@@ -7,6 +7,7 @@
 #include <fstream>
 #include <chrono>
 #include <thread>
+#include <iomanip>
 
 #ifdef _WIN32
 #include <conio.h>
@@ -348,7 +349,8 @@ public:
         findBracket();
         
         sleep_ms(500);
-        std::cout << std::endl << "Roots lie between (" << a << ", " << b << ")" << std::endl << std::endl;
+        std::cout << std::endl << "Roots lie between (" << std::fixed << std::setprecision(4) << a 
+                  << ", " << std::fixed << std::setprecision(4) << b << ")" << std::endl << std::endl;
 
         int count = 0;
         while (std::abs(y_c) >= tolerance && count < max_iterations) {
@@ -358,7 +360,8 @@ public:
             
             sleep_ms(200);
             std::cout << std::endl << count << ") Iteration: " << std::endl;
-            std::cout << "c = " << c << "\t f(c) = " << y_c << std::endl;
+            std::cout << "c = " << std::fixed << std::setprecision(4) << c 
+                      << "\t f(c) = " << std::fixed << std::setprecision(4) << y_c << std::endl;
 
             if (y_c >= tolerance) {
                 b = c;
@@ -371,7 +374,7 @@ public:
         if (count >= max_iterations) {
             std::cout << "Maximum iterations reached, solution may not be accurate." << std::endl;
         }
-        std::cout << "By Regula Falsi Method, c = " << c << " (approximately)";
+        std::cout << "By Regula Falsi Method, c = " << std::fixed << std::setprecision(4) << c << " (approximately)";
     }
     
 private:
@@ -399,7 +402,8 @@ private:
                     break;
                 }
             } catch (const std::exception& e) {
-                std::cout << "Error evaluating function at x = " << i << ": " << e.what() << std::endl;
+                std::cout << "Error evaluating function at x = " << std::fixed << std::setprecision(4) << i 
+                          << ": " << e.what() << std::endl;
             }
         }
         
@@ -439,7 +443,8 @@ public:
         std::cin >> b;
         
         sleep_ms(500);
-        std::cout << std::endl << "Starting with initial values (" << a << ", " << b << ")" << std::endl << std::endl;
+        std::cout << std::endl << "Starting with initial values (" << std::fixed << std::setprecision(4) << a 
+                  << ", " << std::fixed << std::setprecision(4) << b << ")" << std::endl << std::endl;
 
         int count = 0;
         while (std::abs(y_x) >= tolerance && count < max_iterations) {
@@ -458,7 +463,8 @@ public:
                 
                 sleep_ms(200);
                 std::cout << std::endl << count << ") Iteration: " << std::endl;
-                std::cout << "x" << count << " = " << c << "\t f(x" << count << ") = " << y_x << std::endl;
+                std::cout << "x" << count << " = " << std::fixed << std::setprecision(4) << c 
+                          << "\t f(x" << count << ") = " << std::fixed << std::setprecision(4) << y_x << std::endl;
 
                 // Updating the values of x:
                 a = b;
@@ -474,7 +480,7 @@ public:
         if (count >= max_iterations) {
             std::cout << "Maximum iterations reached, solution may not be accurate." << std::endl;
         }
-        std::cout << "By Secant Method, x" << count << " = " << c << " (approximately)";
+        std::cout << "By Secant Method, x" << count << " = " << std::fixed << std::setprecision(4) << c << " (approximately)";
     }
 };
 
@@ -510,8 +516,10 @@ public:
 
                 sleep_ms(200);
                 std::cout << std::endl << count << ") Iteration: " << "\t";
-                std::cout << "x" << count-1 << " = " << x1 << "\t f(x" << count-1 << ") = " << fx1 << "\t f'(x" << count-1 << ") = " << dfx1 << std::endl;
-                std::cout << "x" << count << " = " << x2 << std::endl;
+                std::cout << "x" << count-1 << " = " << std::fixed << std::setprecision(4) << x1 
+                          << "\t f(x" << count-1 << ") = " << std::fixed << std::setprecision(4) << fx1 
+                          << "\t f'(x" << count-1 << ") = " << std::fixed << std::setprecision(4) << dfx1 << std::endl;
+                std::cout << "x" << count << " = " << std::fixed << std::setprecision(4) << x2 << std::endl;
 
                 // Updating values
                 x1 = x2;
@@ -528,7 +536,7 @@ public:
         if (count >= max_iterations) {
             std::cout << " (Maximum iterations reached, solution may not be accurate)" << std::endl;
         }
-        std::cout << std::endl << "Answer is " << x2;
+        std::cout << std::endl << "Answer is " << std::fixed << std::setprecision(4) << x2;
     }
 };
 
@@ -565,8 +573,12 @@ public:
 
                 sleep_ms(200);
                 std::cout << count << ") Iteration: " << std::endl;
-                std::cout << "x(i-2) = " << x2 << "\t x(i-1) = " << x1 << "\t x(i) = " << x0 << std::endl;
-                std::cout << "y(i-2) = " << y2 << "\t y(i-1) = " << y1 << "\t y(i) = " << y0 << std::endl << std::endl;
+                std::cout << "x(i-2) = " << std::fixed << std::setprecision(4) << x2 
+                          << "\t x(i-1) = " << std::fixed << std::setprecision(4) << x1 
+                          << "\t x(i) = " << std::fixed << std::setprecision(4) << x0 << std::endl;
+                std::cout << "y(i-2) = " << std::fixed << std::setprecision(4) << y2 
+                          << "\t y(i-1) = " << std::fixed << std::setprecision(4) << y1 
+                          << "\t y(i) = " << std::fixed << std::setprecision(4) << y0 << std::endl << std::endl;
 
                 double t1 = (y1 - y0);
                 double t2 = (x1 - x2)*(x1 - x0);
@@ -598,7 +610,9 @@ public:
                 f_x3 = func.evaluate(x3);
 
                 sleep_ms(200);
-                std::cout << "A = " << A << "\t B = " << B << " \t x(i+1) = " << x3 << std::endl << std::endl;
+                std::cout << "A = " << std::fixed << std::setprecision(4) << A 
+                          << "\t B = " << std::fixed << std::setprecision(4) << B 
+                          << " \t x(i+1) = " << std::fixed << std::setprecision(4) << x3 << std::endl << std::endl;
                 
                 // Updating the values
                 x2 = x1;
@@ -616,9 +630,28 @@ public:
         if (count >= max_iterations) {
             std::cout << "Maximum iterations reached, solution may not be accurate." << std::endl;
         }
-        std::cout << "x(i+1) = " << x3 << " (approximately)";
+        std::cout << "x(i+1) = " << std::fixed << std::setprecision(4) << x3 << " (approximately)";
     }
 };
+
+// Display a stylish ASCII art banner
+void displayBanner() {
+    std::cout << "\n";
+    std::cout << " ╔════════════════════════════════════════════════════════════════╗\n";
+    std::cout << " ║                                                                ║\n";
+    std::cout << " ║  ███╗   ██╗██╗   ██╗███╗   ███╗███████╗██████╗ ██╗ ██████╗    ║\n";
+    std::cout << " ║  ████╗  ██║██║   ██║████╗ ████║██╔════╝██╔══██╗██║██╔════╝    ║\n";
+    std::cout << " ║  ██╔██╗ ██║██║   ██║██╔████╔██║█████╗  ██████╔╝██║██║         ║\n";
+    std::cout << " ║  ██║╚██╗██║██║   ██║██║╚██╔╝██║██╔══╝  ██╔══██╗██║██║         ║\n";
+    std::cout << " ║  ██║ ╚████║╚██████╔╝██║ ╚═╝ ██║███████╗██║  ██║██║╚██████╗    ║\n";
+    std::cout << " ║  ╚═╝  ╚═══╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝╚═╝ ╚═════╝    ║\n";
+    std::cout << " ║                                                                ║\n";
+    std::cout << " ║              METHODS CALCULATOR                               ║\n";
+    std::cout << " ║                                                                ║\n";
+    std::cout << " ║             Author: Prathamesh Khade                          ║\n";
+    std::cout << " ║                                                                ║\n";
+    std::cout << " ╚════════════════════════════════════════════════════════════════╝\n\n";
+}
 
 // Main program
 int main() {
@@ -626,7 +659,8 @@ int main() {
     double tolerance = 0.0001;
     int max_iterations = 100;
     
-    std::cout << "====== Numerical Methods Calculator ======" << std::endl << std::endl;
+    // Display banner with author name
+    displayBanner();
     
     // Function input method selection
     int input_method;
